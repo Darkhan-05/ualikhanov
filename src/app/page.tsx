@@ -1,4 +1,13 @@
-export default function Home() {
+import {STRAPI_API} from "@/config/instance";
+import {ENDPOINTS} from "@/config/endpoints";
+import {ENV} from "@/config/enviroments";
+import {newsItem} from "@/shared/types/news-item.type";
+
+
+export default async function Home() {
+    const response = await STRAPI_API.get(ENDPOINTS.GET.NEWS_LAST);
+    const news = response.data;
+
     return (
         <div>
             <div className="bg-[#004EA7] flex flex-col text-white" style={{
@@ -10,11 +19,11 @@ export default function Home() {
                 <header className="flex justify-between items-center px-6 py-10 text-white">
                     <div className="flex w-full justify-between items-center">
                         <div className="flex items-center">
-                            <img src='/logo.png' alt="Logo" className="h-10"/>
+                            <img  src='/logo.png' alt="Logo" className="h-10 cursor-pointer" />
 
                             <div className="relative ml-4">
                                 <button
-                                    className="flex items-center bg-white/10 text-white px-8 py-2 rounded-lg backdrop-blur-md">
+                                    className="flex cursor-pointer items-center bg-white/10 text-white px-8 py-2 rounded-lg backdrop-blur-md">
                                     Русский
                                     <span className="ml-2">
                                 <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20">
@@ -24,7 +33,7 @@ export default function Home() {
                                 </button>
                             </div>
                         </div>
-                        <div className="flex items-center gap-4">
+                        <div className="flex cursor-pointer items-center gap-4">
                             <div
                                 className="bg-white/10 flex items-center rounded text-white outline-none backdrop-blur-md  ">
                             <span className="ml-4">
@@ -45,14 +54,14 @@ export default function Home() {
                             </svg>
                             </span>
                                 <input type="text" placeholder="Поиск по сайту"
-                                       className="px-6 py-3 text-sm w-64"/>
+                                       className="px-6 py-3 text-sm outline-none w-64"/>
                             </div>
                             <button
-                                className="text-sm px-6 py-3 whitespace-nowrap px-3 py-1 rounded bg-white/10 text-white outline-none backdrop-blur-md">Экранный
+                                className="text-sm px-6 py-3 cursor-pointer whitespace-nowrap px-3 py-1 rounded bg-white/10 text-white outline-none backdrop-blur-md">Экранный
                                 диктор
                             </button>
                             <button
-                                className="text-sm px-6 py-3 whitespace-nowrap px-3 py-1 rounded bg-white/10 text-white outline-none backdrop-blur-md font-semibold">e-University
+                                className="text-sm px-6 py-3 cursor-pointer whitespace-nowrap px-3 py-1 rounded bg-white/10 text-white outline-none backdrop-blur-md font-semibold">e-University
                             </button>
                         </div>
                     </div>
@@ -70,7 +79,7 @@ export default function Home() {
                 <section
                     className="px-6 py-10 pb-32  mt-auto text-white flex flex-col lg:flex-row justify-between items-center gap-10">
                     <div className="">
-                        <h1 className="text-2xl lg:text-8xl leading-20">
+                        <h1 className="text-2xl select-none lg:text-8xl leading-20">
                             Кокшетауский университет
                             имени Шокана <em className="italic font-normal">Уалиханова</em>
                         </h1>
@@ -97,19 +106,19 @@ export default function Home() {
                     </div>
                 </section>
             </div>
-            {/*<div className="w-full px-6 py-4 border-b bg-white">*/}
-            {/*    <div className="max-w-7xl mx-auto">*/}
-            {/*        <input type="text" placeholder="Введите запрос"*/}
-            {/*               className="w-full border px-4 py-2 rounded-lg bg-gray-100 text-gray-700"/>*/}
-            {/*        <div className="mt-2 text-sm text-gray-500">*/}
-            {/*            Популярные запросы:*/}
-            {/*            <a href="#" className="underline hover:text-blue-600">Подразделения</a>,*/}
-            {/*            <a href="#" className="underline hover:text-blue-600">Факультеты и кафедры</a>,*/}
-            {/*            <a href="#" className="underline hover:text-blue-600">Наука и инновации</a>,*/}
-            {/*            <a href="#" className="underline hover:text-blue-600">Услуги</a>*/}
-            {/*        </div>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
+            <div className="w-full px-6 py-4 border-b bg-white">
+                <div className="max-w-7xl mx-auto">
+                    <input type="text" placeholder="Введите запрос"
+                           className="w-full  px-4 py-2 outline-none rounded-lg bg-gray-100 text-gray-700"/>
+                    <div className="mt-2 text-sm text-gray-500">
+                        Популярные запросы:
+                        <a href="#" className="underline hover:text-blue-600">Подразделения</a>,
+                        <a href="#" className="underline hover:text-blue-600">Факультеты и кафедры</a>,
+                        <a href="#" className="underline hover:text-blue-600">Наука и инновации</a>,
+                        <a href="#" className="underline hover:text-blue-600">Услуги</a>
+                    </div>
+                </div>
+            </div>
             <div className="rounded-4xl text-[#004EA7] -mt-10 py-10 bg-white px-6">
                 <div>
                     <h2 className="text-6xl mb-6">Поступление</h2>
@@ -137,27 +146,25 @@ export default function Home() {
                         <div>
                             <h2 className="text-6xl mb-6">Новости</h2>
                             <div className="space-y-4">
-                                <div
-                                    className="flex flex-col justify-center items-start gap-4 border border-gray-300 hover:border-[#004EA7] rounded-xl p-4">
-                                    <img src="https://via.placeholder.com/80" alt="news"
-                                         className="rounded-md w-20 h-20 object-cover"/>
-                                    <div>
-                                        <div className="text-sm text-gray-500 mb-1">14 апреля 2025</div>
-                                        <div className="text-xl font-medium">С 26 по 28 марта 2025 года, а также 14
-                                            апреля...
+                                {news.data.map((item: newsItem) => (
+                                    <div key={item.id}
+                                         className="flex cursor-pointer flex-col justify-center items-start gap-4 border border-gray-300 hover:border-[#004EA7] rounded-xl p-4">
+                                        <img src={
+                                            ENV.BACKEND_API_URL +
+                                            (item.image.formats.medium?.url || item.image.url)
+                                        } alt="news"
+                                             className="rounded-full w-44 h-44 object-cover"/>
+                                        <div>
+                                            <div className="text-sm text-gray-500 mb-1">
+                                                {new Date(item.publishedAt).toLocaleDateString('ru-RU', {
+                                                    day: 'numeric',
+                                                    month: 'long',
+                                                    year: 'numeric'
+                                                })}</div>
+                                            <div className="text-xl truncate max-w-full font-medium">{item.title}</div>
                                         </div>
                                     </div>
-                                </div>
-                                <div
-                                    className="flex flex-col justify-center items-start gap-4 border border-gray-300 hover:border-[#004EA7] rounded-xl p-4">
-                                    <img src="https://via.placeholder.com/80" alt="news"
-                                         className="rounded-md w-20 h-20 object-cover"/>
-                                    <div>
-                                        <div className="text-sm text-gray-500 mb-1">14 апреля 2025</div>
-                                        <div className="text-xl font-medium">14 апреля 2025 года состоится расширенно...
-                                        </div>
-                                    </div>
-                                </div>
+                                ))}
                             </div>
                         </div>
 
@@ -186,7 +193,8 @@ export default function Home() {
                 <div className=" px-6 py-12 grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div>
                         <h2 className="text-4xl mb-4">Студентам</h2>
-                        <div className="border h-80 rounded-xl border-gray-300 hover:border-[#004EA7] p-6 space-y-2 text-sm">
+                        <div
+                            className="border h-80 rounded-xl border-gray-300 hover:border-[#004EA7] p-6 space-y-2 text-sm">
                             <a href="#" className="block text-lg hover:underline">Telegram Bot</a>
                             <a href="#" className="block text-lg hover:underline">Platonus</a>
                             <a href="#" className="block text-lg hover:underline">Расписание</a>
@@ -200,7 +208,8 @@ export default function Home() {
 
                     <div>
                         <h2 className="text-4xl mb-4">Сотрудникам</h2>
-                        <div className="border h-80 rounded-xl border-gray-300 hover:border-[#004EA7] p-6 space-y-2 text-sm">
+                        <div
+                            className="border h-80 rounded-xl border-gray-300 hover:border-[#004EA7] p-6 space-y-2 text-sm">
                             <a href="#" className="block text-xl hover:underline">Salem Office</a>
                             <a href="#" className="block text-xl hover:underline">Корпоративная почта</a>
                             <a href="#" className="block text-xl hover:underline">ИС Параграф</a>
