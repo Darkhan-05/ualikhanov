@@ -4,7 +4,7 @@ export type newsItem = {
     id: number;
     documentId: string;
     title: string;
-    description: any[];
+    description: string;
     createdAt: string;
     updatedAt: string;
     publishedAt: string;
@@ -24,7 +24,7 @@ export type newsItem = {
         url: string;
         previewUrl: string | null;
         provider: string;
-        provider_metadata: any;
+        provider_metadata: string;
         createdAt: string;
         updatedAt: string;
         publishedAt: string;
